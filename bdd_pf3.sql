@@ -50,9 +50,12 @@ CREATE TABLE Cliente_Particular(
 );
 CREATE TABLE Perfil(
     perfil_id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_usuario VARCHAR(50) UNIQUE NOT NULL,
-    email_usuario VARCHAR(50) NOT NULL,
-    password_usuario VARCHAR(255) NOT NULL,
+    foto_perfil VARCHAR(255),
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    activo INT NOT NULL DEFAULT 1,
+    fecha_creacion DATE NOT NULL,
     rol_id INT NOT NULL,
     FOREIGN KEY (rol_id) REFERENCES Roles(rol_id)
 );
@@ -61,13 +64,13 @@ CREATE TABLE Roles(
     nombre_rol VARCHAR(50) NOT NULL
 );
 CREATE TABLE Experiencia(
-experiencia_id INT AUTO_INCREMENT PRIMARY KEY,
-titulo VARCHAR(100) NOT NULL,
-descripcion VARCHAR(255) NOT NULL,
-fecha_inicio DATE NOT NULL,
-fecha_fin DATE NOT NULL,
-employee_id INT NOT NULL,
-FOREIGN KEY(employee_id) REFERENCES Employee(employee_id)
+    experiencia_id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    employee_id INT NOT NULL,
+    FOREIGN KEY(employee_id) REFERENCES Employee(employee_id)
 );
 CREATE TABLE Proyecto(
 proyecto_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -148,6 +151,8 @@ CREATE TABLE Instructor_Empresa(
     nombre VARCHAR(50) NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     empresa_id INT NOT NULL,
+    perfil_id INT NOT NULL,
+    FOREIGN KEY (perfil_id) REFERENCES Perfil(perfil_id),
     FOREIGN KEY(empresa_id)REFERENCES Empresa(empresa_id)
 );
 CREATE TABLE Bootcamp_Empresa(
@@ -189,7 +194,9 @@ CREATE TABLE Instructor_Particular (
     instructor_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     titulo VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(255) NOT NULL
+    descripcion VARCHAR(255) NOT NULL,
+    perfil_id INT NOT NULL,
+    FOREIGN KEY (perfil_id) REFERENCES Perfil(perfil_id)
 );
 CREATE TABLE Bootcamp_Particular(
     bootcamp_id INT AUTO_INCREMENT PRIMARY KEY,

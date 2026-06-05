@@ -1,11 +1,10 @@
 package com.example.Proyecto_Final_Progra3.model.enterprise;
 
-import com.example.Proyecto_Final_Progra3.model.Perfil;
+import com.example.Proyecto_Final_Progra3.model.perfil.Perfil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 @Data
 @AllArgsConstructor
